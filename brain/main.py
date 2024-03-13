@@ -46,28 +46,33 @@ def handleCommand(command):
     elif "calculate" in command:
         result = performCalculation(command)
         speak(f"The result is {result}")
-    elif "add to my to-do list" in command:
-        item = command.replace("add to my to-do list", "").strip()
-        if item:
+    elif "add to my to do list" in command:
+        while True:
+            speak("What would you like to add to your to do list?")
+            item = listen()
+            if item:
+                break
+            else:
+                speak("I didn't catch that. Please try again.")
+        while True:
             speak(f"What is the priority level for {item}? Please say 1, 2, or 3.")
             priority = listen()
             if priority and priority in ["1", "2", "3"]:
-                speak(addTodoItem(item, priority))
+              speak(addTodoItem(item, priority))
+              break
             else:
                 speak("Sorry, that's not a valid priority level. Please try again.")
-        else:
-            speak("Please tell me what you want to add to your to-do list.")
-    elif "remove from my to-do list" in command:
+    elif "remove from my to do list" in command:
         item = command.replace("remove from my to-do list", "").strip()
         if item:
             speak(removeTodoItem(item))
         else:
             speak("Please tell me what you want to remove from your to-do list.")
-    elif "what's on my to-do list" in command or "show my to-do list" in command:
+    elif "what's on my to do list" in command or "show my to-do list" in command:
         speak(displayTodoList())
-    elif "stop" in command:
+    elif "ellie goodbye" in command:
         speak("Goodbye!")
-        return "stop"
+        return "Goodbye!"
     else:
         speak("Sorry, I didn't understand that. Can you please repeat?")
 
