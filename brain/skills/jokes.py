@@ -5,6 +5,7 @@
 # File Name: jokes.py
 
 import random
+import pyjokes
 
 jokesList = [
     "Why don't scientists trust atoms? Because they make up everything.",
@@ -12,4 +13,7 @@ jokesList = [
 ]
 
 def tellJoke():
+    return pyjokes.get_joke()
+
+def tellReallyFunnyJoke():
     return random.choice(jokesList)

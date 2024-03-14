@@ -6,12 +6,16 @@
 
 #import libaries & files
 import speech_recognition as sr
-from gtts import gTTS
 import os
 import re
-from skills.jokes import tellJoke
+import datetime
+import pyjokes
+
+from gtts import gTTS
+from skills.jokes import tellJoke, tellReallyFunnyJoke
 from skills.calculations import performCalculation
 from skills.todoList import addTodoItem, removeTodoItem, displayTodoList
+
 
 # Initialize the recognizer
 r = sr.Recognizer()
@@ -28,7 +32,6 @@ def listen():
         print("Listening...")
         audio = r.listen(source)
     try:
-        print("I Made it this far.")
         command = r.recognize_google(audio).lower()
         print(f"You said: {command}")
         return command
@@ -39,10 +42,22 @@ def listen():
         speak("Could not request results; check your internet connection.")
         return None
 
+def greetingTime():
+    hour = int(datetime.datetime.now().hour)
+    if hour >= 0 and hour < 12:
+       speak("Good Morning !")
+    elif hour >= 12 and hour < 18:
+        speak("Good Afternoon !")
+    else:
+        speak("Good Evening !")
+
 def handleCommand(command):
     """Handles the given command."""
     if "joke" in command:
-        speak(tellJoke())
+        if "really funny" in command:
+            speak(tellReallyFunnyJoke())
+        else:
+            speak(tellJoke())
     elif "calculate" in command:
         result = performCalculation(command)
         speak(f"The result is {result}")
@@ -50,14 +65,16 @@ def handleCommand(command):
         while True:
             speak("What would you like to add to your to do list?")
             item = listen()
-            if item:
+            speak(f"You would like me to add {item} to your to do list?")
+            """NEED TO ASSIGN LISTEN COMAND TO CONFIRM ITEM. CURRENTLY IN-PROGRESS - ML"""
+            if "yes" in command:
                 break
             else:
                 speak("I didn't catch that. Please try again.")
         while True:
             speak(f"What is the priority level for {item}? Please say 1, 2, or 3.")
             priority = listen()
-            if priority and priority in ["1", "2", "3"]:
+            if priority and priority in ["one", "two", "three"]:
               speak(addTodoItem(item, priority))
               break
             else:
@@ -68,17 +85,18 @@ def handleCommand(command):
             speak(removeTodoItem(item))
         else:
             speak("Please tell me what you want to remove from your to-do list.")
-    elif "what's on my to do list" in command or "show my to-do list" in command:
+    elif "ellie what's on my to do list" in command or "tell me my to-do list" in command:
         speak(displayTodoList())
-    elif "ellie goodbye" in command:
+    elif "goodbye ellie" in command:
         speak("Goodbye!")
-        return "Goodbye!"
+        return "stop"
     else:
         speak("Sorry, I didn't understand that. Can you please repeat?")
 
 def main():
     """The main function that runs the voice assistant."""
-    speak("Hello, I'm Ellie, your voice assistant. How can I help you?")
+    greetingTime()
+    speak("Hello, I'm Ellie, your personal desk assistant. How can I help you?")
 
     while True:
         command = listen()
