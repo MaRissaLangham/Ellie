@@ -53,45 +53,56 @@ def greetingTime():
 
 def handleCommand(command):
     """Handles the given command."""
-    if "joke" in command:
-        if "really funny" in command:
-            speak(tellReallyFunnyJoke())
-        else:
-            speak(tellJoke())
-    elif "calculate" in command:
-        result = performCalculation(command)
-        speak(f"The result is {result}")
-    elif "add to my to do list" in command:
-        while True:
-            speak("What would you like to add to your to do list?")
-            item = listen()
-            speak(f"You would like me to add {item} to your to do list?")
-            """NEED TO ASSIGN LISTEN COMAND TO CONFIRM ITEM. CURRENTLY IN-PROGRESS - ML"""
-            if "yes" in command:
-                break
+    if "eliie" in command:
+        speak("What's up?")
+        
+
+        if "joke" in command:
+            if "really funny" in command:
+                speak(tellReallyFunnyJoke())
             else:
-                speak("I didn't catch that. Please try again.")
-        while True:
-            speak(f"What is the priority level for {item}? Please say 1, 2, or 3.")
-            priority = listen()
-            if priority and priority in ["one", "two", "three"]:
-              speak(addTodoItem(item, priority))
-              break
+                speak(tellJoke())
+
+        elif "calculate" in command:
+            result = performCalculation(command)
+            speak(f"The result is {result}")
+
+        elif "add to my to do list" in command:
+            while True:
+                speak("What would you like to add to your to do list?")
+                item = listen()
+                speak(f"You would like me to add {item} to your to do list?")
+                """NEED TO ASSIGN LISTEN COMAND TO CONFIRM ITEM. CURRENTLY IN-PROGRESS - ML"""
+                if "yes" in command:
+                    break
+                else:
+                    speak("I didn't catch that. Please try again.")
+                """^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"""
+            while True:
+                speak(f"What is the priority level for {item}? Please say 1, 2, or 3.")
+                priority = listen()
+                if priority and priority in ["one", "two", "three"]:
+                    speak(addTodoItem(item, priority))
+                    break
+                else:
+                    speak("Sorry, that's not a valid priority level. Please try again.")
+
+        elif "remove from my to do list" in command:
+            item = command.replace("remove from my to-do list", "").strip()
+            if item:
+                speak(removeTodoItem(item))
             else:
-                speak("Sorry, that's not a valid priority level. Please try again.")
-    elif "remove from my to do list" in command:
-        item = command.replace("remove from my to-do list", "").strip()
-        if item:
-            speak(removeTodoItem(item))
+                speak("Please tell me what you want to remove from your to-do list.")
+
+        elif "ellie what's on my to do list" in command or "tell me my to-do list" in command:
+            speak(displayTodoList())
+
+        elif "goodbye" in command:
+            speak("Goodbye!")
+            return "stop"
+        
         else:
-            speak("Please tell me what you want to remove from your to-do list.")
-    elif "ellie what's on my to do list" in command or "tell me my to-do list" in command:
-        speak(displayTodoList())
-    elif "goodbye ellie" in command:
-        speak("Goodbye!")
-        return "stop"
-    else:
-        speak("Sorry, I didn't understand that. Can you please repeat?")
+            speak("Sorry, I didn't understand that. Can you please repeat?")
 
 def main():
     """The main function that runs the voice assistant."""
