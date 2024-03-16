@@ -94,7 +94,9 @@ def handleCommand(command):
 
     elif "ellie what's on my to do list" in command or "tell me my to-do list" in command:
         speak(displayTodoList())
-
+        """elif " ellis lets play a game" in command or "want to play a game?" in command:
+        speak("Sure! What game do you want to play?")"""
+        """GAMES: guess the number, word association, trivia, 20 questions, and wordle"""
     elif "goodbye ellie" in command:
         speak("Goodbye, Marissa!")
         return "stop"
