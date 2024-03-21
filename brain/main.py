@@ -15,6 +15,7 @@ from gtts import gTTS
 from skills.jokes import tellJoke, tellReallyFunnyJoke
 from skills.calculations import performCalculation
 from skills.todoList import addTodoItem, removeTodoItem, displayTodoList
+from skills.games.gamesMain import whichGame, displayGameList
 
 
 # Initialize the recognizer
@@ -94,9 +95,17 @@ def handleCommand(command):
 
     elif "ellie what's on my to do list" in command or "tell me my to-do list" in command:
         speak(displayTodoList())
-        """elif " ellis lets play a game" in command or "want to play a game?" in command:
-        speak("Sure! What game do you want to play?")"""
-        """GAMES: guess the number, word association, trivia, 20 questions, and wordle"""
+
+    elif "ellie let's play a game" in command or "ellie want to play a game?" in command:
+        speak("Sure! Do you want to hear the games I have?")
+        command = listen() 
+        if "no" in command:
+            speak("which game would you like to play?")
+            item = listen()
+            whichGame(item)
+        elif "yes" in command:
+            speak(displayGameList)
+
     elif "goodbye ellie" in command:
         speak("Goodbye, Marissa!")
         return "stop"
