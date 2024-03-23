@@ -14,7 +14,10 @@ from skills.games.wordle import """
 gameList = ["twenty questions", "guess the number", "snaps", "trivia", "word association", "wordle"]
 
 def displayGameList():
-    return gameList
+    gameListStr = "Here's the games I have:\n"
+    for item in gameList:
+        gameListStr += f"- {item[0]}\n"
+    return gameListStr.strip()
 
 def whichGame(item):
     for i, gameList in enumerate(gameList):
@@ -22,4 +25,3 @@ def whichGame(item):
            return f"Sure lets play {item} {i}."
     else:
         return f"Oh I am sorry. I do not have the game {item}. please try again."
-        

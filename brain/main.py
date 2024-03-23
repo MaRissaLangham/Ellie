@@ -98,12 +98,12 @@ def handleCommand(command):
 
     elif "ellie let's play a game" in command or "ellie want to play a game?" in command:
         speak("Sure! Do you want to hear the games I have?")
-        command = listen() 
-        if "no" in command:
+        yesOrNo = listen() 
+        if "no" in yesOrNo:
             speak("which game would you like to play?")
             item = listen()
             whichGame(item)
-        elif "yes" in command:
+        elif "yes" in yesOrNo:
             speak(displayGameList)
 
     elif "goodbye ellie" in command:
