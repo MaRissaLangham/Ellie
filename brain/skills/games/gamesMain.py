@@ -16,7 +16,7 @@ gameList = ["twenty questions", "guess the number", "snaps", "trivia", "word ass
 def displayGameList():
     gameListStr = "Here's the games I have:\n"
     for item in gameList:
-        gameListStr += f"{item[0]}\n"
+        gameListStr += f" - {item[0]}\n"
     return gameListStr
 
 def whichGame(item):
