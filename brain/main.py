@@ -104,7 +104,7 @@ def handleCommand(command):
             item = listen()
             whichGame(item)
         elif "yes" in yesOrNo:
-            speak(displayGameList)
+            speak(displayGameList())
 
     elif "goodbye ellie" in command:
         speak("Goodbye, Marissa!")

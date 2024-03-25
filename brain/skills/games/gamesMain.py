@@ -16,12 +16,11 @@ gameList = ["twenty questions", "guess the number", "snaps", "trivia", "word ass
 def displayGameList():
     gameListStr = "Here's the games I have:\n"
     for item in gameList:
-        gameListStr += f"- {item[0]}\n"
-    return gameListStr.strip()
+        gameListStr += f"{item[0]}\n"
+    return gameListStr
 
 def whichGame(item):
-    for i, gameList in enumerate(gameList):
-        if gameList == item:
-           return f"Sure lets play {item} {i}."
+    if gameList == item:
+           return f"Sure lets play {item} "
     else:
         return f"Oh I am sorry. I do not have the game {item}. please try again."
