@@ -9,27 +9,22 @@ import speech_recognition as sr
 from gtts import gTTS
 import os
 
-"""def guessNumDifficulty(difficultyLevel):
+def guessNumDifficulty(difficultyLevel, maxNum):
+    if "1" or "one" in difficultyLevel:
+         maxNum == 100
+    elif "2" or "two" in difficultyLevel:
+        maxNum == 500
+    elif "3" or "three" in difficultyLevel:
+        maxNum == 1000
+    elif "4" or "four" in difficultyLevel:
+        maxNum == 10000
+    elif "5" or "five" in difficultyLevel:
+        maxNum == 100000
+
+def guessTheNumber(maxNum):
+    number = random.randint(1, maxNum)
+    attempts = 0
+    return number
+
     
-
-
-def guessTheNumber(difficultyLevel):
-
-    difficulty_ranges = {1: 100, 2: 500, 3: 1000, 4: 10000, 5: 100000}
-    max_number = difficulty_ranges.get(difficultyLevel, 100)
-
-    if difficultyLevel == 1:
-    
-    elif difficultyLevel == 2:
-
-    elif difficultyLevel == 3:
-
-    elif difficultyLevel == 4:
-
-    elif difficultyLevel == 5:
-
-else:
-        guessNumDifficulty()
-    
-        number = random.randint(1, max_number) attempts = 0"""
   

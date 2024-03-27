@@ -16,7 +16,7 @@ from skills.jokes import tellJoke, tellReallyFunnyJoke
 from skills.calculations import performCalculation
 from skills.todoList import addTodoItem, removeTodoItem, displayTodoList
 from skills.games.gamesMain import whichGame, displayGameList
-from skills.games.guessNum import guessNumDifficulty, guessTheNumber
+from skills.games.guessNum import guessNumDifficulty, guessTheNumber, maxNum
 
 
 # Initialize the recognizer
