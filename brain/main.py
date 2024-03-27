@@ -16,6 +16,7 @@ from skills.jokes import tellJoke, tellReallyFunnyJoke
 from skills.calculations import performCalculation
 from skills.todoList import addTodoItem, removeTodoItem, displayTodoList
 from skills.games.gamesMain import whichGame, displayGameList
+from skills.games.guessNum import guessNumDifficulty, guessTheNumber
 
 
 # Initialize the recognizer
@@ -103,6 +104,8 @@ def handleCommand(command):
             speak("which game would you like to play?")
             item = listen()
             whichGame(item)
+            if "guess the number" in item:
+                speak("What difficulty do you want to play? 1, 2, 3, 4, or 5")
         elif "yes" in yesOrNo:
             speak(displayGameList())
 
