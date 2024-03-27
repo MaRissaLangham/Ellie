@@ -21,9 +21,8 @@ def guessNumDifficulty(difficultyLevel, maxNum):
     elif "5" or "five" in difficultyLevel:
         maxNum == 100000
 
-def guessTheNumber(maxNum):
+def getTheNum(maxNum):
     number = random.randint(1, maxNum)
-    attempts = 0
     return number
 
     

@@ -16,7 +16,7 @@ from skills.jokes import tellJoke, tellReallyFunnyJoke
 from skills.calculations import performCalculation
 from skills.todoList import addTodoItem, removeTodoItem, displayTodoList
 from skills.games.gamesMain import whichGame, displayGameList
-from skills.games.guessNum import guessNumDifficulty, guessTheNumber, maxNum
+from skills.games.guessNum import guessNumDifficulty, getTheNum
 
 
 # Initialize the recognizer
@@ -100,21 +100,44 @@ def handleCommand(command):
     elif "ellie let's play a game" in command or "ellie want to play a game?" in command:
         speak("Sure! Do you want to hear the games I have?")
         yesOrNo = listen() 
-        if "no" in yesOrNo:
+
+        if "yes" in yesOrNo:
+            speak(displayGameList())
+
+        elif "no" in yesOrNo:
             speak("which game would you like to play?")
             item = listen()
             whichGame(item)
 
             if "guess the number" in item:
+                # get and set difficulty for the game.
                 speak("What difficulty do you want to play? 1, 2, 3, 4, or 5")
                 difficultyLevel = listen()
                 guessNumDifficulty(difficultyLevel)
-                speak("Guess a number between 1 and {numMax}.")
-                guessNum = listen()
-                guessTheNumber(maxNum,guessNum)
 
-        elif "yes" in yesOrNo:
-            speak(displayGameList())
+                # set and get the number and the max number for the game.
+                maxNum = 0
+                number = 0
+                getTheNum(maxNum,number)
+
+                speak(f"I'm thinking of a number between 1 and {maxNum}.")
+                attempts = 0
+
+                while True:
+                    speak("What's your guess?")
+                    guessNum = listen()  # Implement the listen function to capture user input
+                    try:
+                        guessNum = int(guessNum)
+                        attempts += 1
+                        if guessNum < number:
+                            speak("It's higher.")
+                        elif guessNum > number:
+                            speak("It's lower.")
+                        else:
+                            speak(f"Correct! You've guessed my number in {attempts} attempts.")
+                        break
+                    except ValueError:
+                        speak("Please say a number.")
 
     elif "goodbye ellie" in command:
         speak("Goodbye, Marissa!")
