@@ -104,8 +104,14 @@ def handleCommand(command):
             speak("which game would you like to play?")
             item = listen()
             whichGame(item)
+
             if "guess the number" in item:
                 speak("What difficulty do you want to play? 1, 2, 3, 4, or 5")
+                difficultyLevel = listen()
+                guessNumDifficulty(difficultyLevel)
+                speak("Guess a number between 1 and {numMax}.")
+                guessNum = listen()
+
         elif "yes" in yesOrNo:
             speak(displayGameList())
 
