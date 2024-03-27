@@ -111,12 +111,12 @@ def handleCommand(command):
         return "stop"
     
     else:
-        speak("Sorry, I didn't understand that. Can you please repeat?")
+        speak("Sorry, I didn't understand that. Please try again.")
 
 def main():
     """The main function that runs the voice assistant."""
     greetingTime()
-    speak("Hello, I'm Ellie, your personal desk assistant. How can I help you?")
+    speak("I'm Ellie, your personal desk assistant. How can I help you?")
 
     while True:
         command = listen()
