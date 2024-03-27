@@ -111,6 +111,7 @@ def handleCommand(command):
                 guessNumDifficulty(difficultyLevel)
                 speak("Guess a number between 1 and {numMax}.")
                 guessNum = listen()
+                guessTheNumber(maxNum,guessNum)
 
         elif "yes" in yesOrNo:
             speak(displayGameList())
