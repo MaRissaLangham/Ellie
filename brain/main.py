@@ -16,7 +16,7 @@ from skills.jokes import tellJoke, tellReallyFunnyJoke
 from skills.calculations import performCalculation
 from skills.todoList import addTodoItem, removeTodoItem, displayTodoList
 from skills.games.gamesMain import whichGame, displayGameList
-from skills.games.guessNum import guessNumDifficulty, getTheNum
+from skills.games.guessNum import guessNumDifficulty, getTheNum, getTheMaxNum
 
 
 # Initialize the recognizer
@@ -101,7 +101,7 @@ def handleCommand(command):
         speak("Sure! Do you want to hear the games I have?")
         yesOrNo = listen() 
 
-        if "yes" in yesOrNo:
+        if "yes" or "sure" in yesOrNo:
             speak(displayGameList())
 
         elif "no" in yesOrNo:
@@ -111,33 +111,64 @@ def handleCommand(command):
 
             if "guess the number" in item:
                 # get and set difficulty for the game.
-                speak("What difficulty do you want to play? 1, 2, 3, 4, or 5")
+                speak ("Welcome to the guess the number game! Is this your first time playing?")
+                yesOrNo2 = listen()
+                
+                if "yes" in yesOrNo2:
+
+                    gameIntroStr = """In this game, I'll think of a number within a certain range, and you have to guess what it is.
+                    There are five difficulty levels, each with a different range of numbers. Level 1 is up to 100.
+                    Level 2 is up to 500. Level 3 is up to 1000. Level 4 is up to 10000. and Level 5 is up to 100000.
+                    You'll guess a number, and I'll tell you if my number is higher or lower than your guess. 
+                    Keep guessing until you find the right number. Good luck!"""
+
+                    speak(gameIntroStr)
+                    
+                elif "no" in yesOrNo2:
+                    speak("Cool! let's play!")
+
+                speak("What difficulty do you want to play? there are 5 difficultiues, not including 0.")
                 difficultyLevel = listen()
-                guessNumDifficulty(difficultyLevel)
+                difficultyLevel = int(difficultyLevel)
+                speak(f"The difficulty level you are wanting is {difficultyLevel}.")
+                yesOrNo3 = listen()
+                if "yes" in yesOrNo3:
+                    speak("Great let's continue!")
+                elif "no" or not "yes" in yesOrNo3:
+                    speak ("Oh no, let's try again!")
+                    while "no" in yesOrNo3:
+                        speak("What difficulty do you want to play? ")
+                        difficultyLevel = listen()
+                        difficultyLevel = int(difficultyLevel)
+                        speak(f"The difficulty level you are wanting is {difficultyLevel}.")
+                        yesOrNo3 = listen()
+                else:
+                    speak("I couldn't quite catch that. please try again.")
 
-                # set and get the number and the max number for the game.
-                maxNum = 0
-                number = 0
-                getTheNum(maxNum,number)
+            #Getters for maxNum & Number
+            maxNum = getTheMaxNum(maxNum)
+            number = getTheNum(maxNum, number)
 
-                speak(f"I'm thinking of a number between 1 and {maxNum}.")
-                attempts = 0
+            speak(f"I'm thinking of a number between 1 and {maxNum}.")
+            attempts = 0
 
-                while True:
-                    speak("What's your guess?")
-                    guessNum = listen() # Implement the listen function to capture user input
-                    try:
-                        guessNum = int(guessNum)
-                        attempts += 1
-                        if guessNum < number:
-                            speak("It's higher.")
-                        elif guessNum > number:
-                            speak("It's lower.")
-                        else:
-                            speak(f"Correct! You've guessed my number in {attempts} attempts.")
-                        break
-                    except ValueError:
-                        speak("Please say a number.")
+            while True:
+                speak("What's your guess?")
+                guessNum = listen() # Implement the listen function to capture user input
+                try:
+                    guessNum = int(guessNum)
+                    attempts += 1
+                    if guessNum < number:
+                        speak("It's higher.")
+                    elif guessNum > number:
+                        speak("It's lower.")
+                    else:
+                        speak(f"Correct! You've guessed my number in {attempts} attempts.")
+                    break
+                except ValueError:
+                    speak("Please say a number.")
+        else:
+            speak("I couldn't quite catch that. please try again.")
 
     elif "goodbye ellie" in command:
         speak("Goodbye, Marissa!")
