@@ -72,7 +72,7 @@ def handleCommand(command):
             speak(f"Did you say you want to add '{item}' to your to-do list?")
             confirmation = listen()  # Listen for the user's confirmation
             if "yes" in confirmation:
-                break  # Break if the user confirms
+                break # Break if the user confirms
             else:
                 speak("Let's try that again. Please tell me what to add.")
         while True: # After confirmation, proceed to ask for priority
@@ -125,7 +125,7 @@ def handleCommand(command):
 
                 while True:
                     speak("What's your guess?")
-                    guessNum = listen()  # Implement the listen function to capture user input
+                    guessNum = listen() # Implement the listen function to capture user input
                     try:
                         guessNum = int(guessNum)
                         attempts += 1
