@@ -95,7 +95,7 @@ def handleCommand(command):
         else:
             speak("Please tell me what you want to remove from your to-do list.")
 
-    elif "ellie what's on my to do list" in command or "tell me my to-do list" in command:
+    elif "what's on my to do list" in command or "tell me my to-do list" in command:
         speak(displayTodoList())
 
     elif "play a game" in command:
