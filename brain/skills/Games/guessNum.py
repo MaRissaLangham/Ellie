@@ -9,8 +9,6 @@ import speech_recognition as sr
 from gtts import gTTS
 import os
 
-
-
 def setDifficultyLevel (userDifficultyLevel):
     if "1" in userDifficultyLevel:
         userDifficultyLevel == 1
