@@ -143,6 +143,8 @@ def handleCommand(command):
                         setDifficultyLevel(userDifficultyLevel)
                         speak(f"The difficulty level you are wanting is {difficultyLevel}.")
                         yesOrNo3 = listen()
+                        
+                        """^^^^^^^^^^ Currently working on a better implementation of the above and trying to finish. ^^^^^^^"""
                 else:
                     speak("I couldn't quite catch that. Please say yes or no next time. Try again.")
 
