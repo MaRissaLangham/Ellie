@@ -10,16 +10,30 @@ from gtts import gTTS
 import os
 
 
-def getTheMaxNum (maxNum,difficultyLevel):
-    if 1 in difficultyLevel:
+
+def setDifficultyLevel (userDifficultyLevel):
+    if "1" in userDifficultyLevel:
+        userDifficultyLevel == 1
+    elif "2" in userDifficultyLevel:
+        userDifficultyLevel == 2
+    elif "3" in userDifficultyLevel:
+        userDifficultyLevel == 3
+    elif "4" in userDifficultyLevel:
+        userDifficultyLevel == 4
+    elif "5" in userDifficultyLevel:
+        userDifficultyLevel == 5
+    return userDifficultyLevel
+
+def getTheMaxNum (maxNum,userDifficultyLevel):
+    if 1 in userDifficultyLevel:
         maxNum == 100
-    elif 2 in difficultyLevel:
+    elif 2 in userDifficultyLevel:
         maxNum == 500
-    elif 3 in difficultyLevel:
+    elif 3 in userDifficultyLevel:
         maxNum == 1000
-    elif 4 in difficultyLevel:
+    elif 4 in userDifficultyLevel:
         maxNum == 10000
-    elif 5 in difficultyLevel:
+    elif 5 in userDifficultyLevel:
         maxNum == 100000
     return maxNum
 

@@ -16,7 +16,7 @@ from skills.jokes import tellJoke, tellReallyFunnyJoke
 from skills.calculations import performCalculation
 from skills.todoList import addTodoItem, removeTodoItem, displayTodoList
 from skills.games.gamesMain import whichGame, displayGameList
-from skills.games.guessNum import guessNumDifficulty, getTheNum, getTheMaxNum
+from skills.games.guessNum import setDifficultyLevel, getTheNum, getTheMaxNum
 
 
 # Initialize the recognizer
@@ -32,6 +32,7 @@ def listen():
     """Listens for audio input and returns the recognized text."""
     with sr.Microphone() as source:
         print("Listening...")
+        r.adjust_for_ambient_noise(source)
         audio = r.listen(source)
     try:
         command = r.recognize_google(audio).lower()
@@ -97,23 +98,19 @@ def handleCommand(command):
     elif "ellie what's on my to do list" in command or "tell me my to-do list" in command:
         speak(displayTodoList())
 
-    elif "ellie let's play a game" in command or "ellie want to play a game?" in command:
+    elif "play a game" in command:
         speak("Sure! Do you want to hear the games I have?")
         yesOrNo = listen() 
-
-        if "yes" or "sure" in yesOrNo:
+        if "yes" in yesOrNo:
             speak(displayGameList())
-
-        elif "no" in yesOrNo:
+        else:
             speak("which game would you like to play?")
             item = listen()
             whichGame(item)
-
             if "guess the number" in item:
                 # get and set difficulty for the game.
                 speak ("Welcome to the guess the number game! Is this your first time playing?")
                 yesOrNo2 = listen()
-                
                 if "yes" in yesOrNo2:
 
                     gameIntroStr = """In this game, I'll think of a number within a certain range, and you have to guess what it is.
@@ -127,23 +124,27 @@ def handleCommand(command):
                 elif "no" in yesOrNo2:
                     speak("Cool! let's play!")
 
+                userDifficultyLevel = 0
                 speak("What difficulty do you want to play? there are 5 difficultiues, not including 0.")
                 difficultyLevel = listen()
-                difficultyLevel = int(difficultyLevel)
-                speak(f"The difficulty level you are wanting is {difficultyLevel}.")
+                print("I made it this far")
+                command = userDifficultyLevel
+                setDifficultyLevel(userDifficultyLevel)
+                speak(f"The difficulty level you are wanting is {userDifficultyLevel}.")
+                print("No, I made it this far")
                 yesOrNo3 = listen()
                 if "yes" in yesOrNo3:
                     speak("Great let's continue!")
-                elif "no" or not "yes" in yesOrNo3:
+                elif "no" in yesOrNo3:
                     speak ("Oh no, let's try again!")
                     while "no" in yesOrNo3:
-                        speak("What difficulty do you want to play? ")
                         difficultyLevel = listen()
-                        difficultyLevel = int(difficultyLevel)
+                        command = userDifficultyLevel
+                        setDifficultyLevel(userDifficultyLevel)
                         speak(f"The difficulty level you are wanting is {difficultyLevel}.")
                         yesOrNo3 = listen()
                 else:
-                    speak("I couldn't quite catch that. please try again.")
+                    speak("I couldn't quite catch that. Please say yes or no next time. Try again.")
 
             #Getters for maxNum & Number
             maxNum = getTheMaxNum(maxNum)
@@ -167,8 +168,6 @@ def handleCommand(command):
                     break
                 except ValueError:
                     speak("Please say a number.")
-        else:
-            speak("I couldn't quite catch that. please try again.")
 
     elif "goodbye ellie" in command:
         speak("Goodbye, Marissa!")
