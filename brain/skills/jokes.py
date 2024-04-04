@@ -10,6 +10,10 @@ import pyjokes
 jokesList = [
     "Why don't scientists trust atoms? Because they make up everything.",
     "Why did the scarecrow win an award? Because he was outstanding in his field."
+    "I told my computer I needed a break, and it said... No problem, I'll just go on a little byte."
+    
+
+
 ]
 
 def tellJoke():
