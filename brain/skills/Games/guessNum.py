@@ -40,4 +40,28 @@ def getTheNum(maxNum, number):
     return number
 
     
+  """
+  #Getters for maxNum & Number
+            maxNum = getTheMaxNum(maxNum)
+            number = getTheNum(maxNum, number)
+
+            speak(f"I'm thinking of a number between 1 and {maxNum}.")
+            attempts = 0
+
+            while True:
+                speak("What's your guess?")
+                guessNum = listen() # Implement the listen function to capture user input
+                try:
+                    guessNum = int(guessNum)
+                    attempts += 1
+                    if guessNum < number:
+                        speak("It's higher.")
+                    elif guessNum > number:
+                        speak("It's lower.")
+                    else:
+                        speak(f"Correct! You've guessed my number in {attempts} attempts.")
+                    break
+                except ValueError:
+                    speak("Please say a number.")
   
+  """

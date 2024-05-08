@@ -107,10 +107,12 @@ def handleCommand(command):
             speak("which game would you like to play?")
             item = listen()
             whichGame(item)
+
             if "guess the number" in item:
                 # get and set difficulty for the game.
                 speak ("Welcome to the guess the number game! Is this your first time playing?")
                 yesOrNo2 = listen()
+
                 if "yes" in yesOrNo2:
 
                     gameIntroStr = """In this game, I'll think of a number within a certain range, and you have to guess what it is.
@@ -148,31 +150,44 @@ def handleCommand(command):
                 else:
                     speak("I couldn't quite catch that. Please say yes or no next time. Try again.")
 
-            #Getters for maxNum & Number
-            maxNum = getTheMaxNum(maxNum)
-            number = getTheNum(maxNum, number)
+            elif "twenty questions" in item:
+                speak ("Welcome to the twenty questions game! Is this your first time playing?")
+                yesOrNo2 = listen()
+                if "yes" in yesOrNo2:
 
-            speak(f"I'm thinking of a number between 1 and {maxNum}.")
-            attempts = 0
+                    gameIntroStr = """In this game,..... Good luck!"""
 
-            while True:
-                speak("What's your guess?")
-                guessNum = listen() # Implement the listen function to capture user input
-                try:
-                    guessNum = int(guessNum)
-                    attempts += 1
-                    if guessNum < number:
-                        speak("It's higher.")
-                    elif guessNum > number:
-                        speak("It's lower.")
-                    else:
-                        speak(f"Correct! You've guessed my number in {attempts} attempts.")
-                    break
-                except ValueError:
-                    speak("Please say a number.")
+                    speak(gameIntroStr)
+
+                elif "no" in yesOrNo2:
+                    speak("Cool! let's play!")
+                else:
+                    speak("I couldn't quite catch that. Please say yes or no next time. Try again.")
+
+                """Logic function for game"""
+
+            elif "trivia" in item:
+                speak ("Welcome to the trivia game! Is this your first time playing?")
+                yesOrNo2 = listen()
+                if "yes" in yesOrNo2:
+
+                    gameIntroStr = """In this game,..... Good luck!"""
+
+                    speak(gameIntroStr)
+
+                elif "no" in yesOrNo2:
+                    speak("Cool! let's play!")
+                else:
+                    speak("I couldn't quite catch that. Please say yes or no next time. Try again.")
+                
+                """Logic function for game"""
+
+            else:
+                speak("I couldn't quite catch that. Please say yes or no next time. Try again.")
 
     elif "goodbye ellie" in command:
         speak("Goodbye, Marissa!")
+
         return "stop"
     
     else:
