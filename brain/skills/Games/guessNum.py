@@ -39,8 +39,8 @@ def getTheNum(maxNum, number):
     number = random.randint(1, maxNum)
     return number
 
-    
-  """
+
+"""
   #Getters for maxNum & Number
             maxNum = getTheMaxNum(maxNum)
             number = getTheNum(maxNum, number)
