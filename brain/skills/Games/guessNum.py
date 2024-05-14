@@ -11,15 +11,15 @@ import os
 
 
 def setDifficultyLevel (userDifficultyLevel):
-    if "1" in userDifficultyLevel:
+    if "1" or "one" in userDifficultyLevel:
         userDifficultyLevel == 1
-    elif "2" in userDifficultyLevel:
+    elif "2" or "two" in userDifficultyLevel:
         userDifficultyLevel == 2
-    elif "3" in userDifficultyLevel:
+    elif "3" or "three" in userDifficultyLevel:
         userDifficultyLevel == 3
-    elif "4" in userDifficultyLevel:
+    elif "4" or "four" in userDifficultyLevel:
         userDifficultyLevel == 4
-    elif "5" in userDifficultyLevel:
+    elif "5" or "five" in userDifficultyLevel:
         userDifficultyLevel == 5
     return userDifficultyLevel
 
@@ -52,7 +52,7 @@ def getTheNum(maxNum, number):
     while True:
         speak("What's your guess?")
         guessNum = listen() # Implement the listen function to capture user input
-        
+
         try:
             guessNum = int(guessNum)
             attempts += 1

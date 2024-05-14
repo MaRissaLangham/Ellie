@@ -129,10 +129,11 @@ def handleCommand(command):
                 
                 else: speak("I couldn't quite catch that. Please say yes or no next time. Try again.")
 
-                speak("What difficulty do you want to play? there are 5 difficultiues, not including 0.")
+                speak("There are 5 difficultiues, not including 0. What difficulty do you want to play?")
 
                 """Getting diff. level"""
                 userDifficultyLevel = listen()
+                
                 """Setting Diff. Level"""
                 setDifficultyLevel(userDifficultyLevel)
 
@@ -147,7 +148,7 @@ def handleCommand(command):
                         difficultyLevel = listen()
                     
                         setDifficultyLevel(userDifficultyLevel)
-                        speak(f"The difficulty level you are wanting is {difficultyLevel}.")
+                        speak(f"The difficulty level you are wanting is {userDifficultyLevel}.")
                         yesOrNo3 = listen()
                 else:
                     speak("I couldn't quite catch that. Please say yes or no next time. Try again.")
