@@ -11,7 +11,7 @@ from skills.games.trivia import
 from skills.games.wordAssociation import 
 from skills.games.wordle import """
 
-gameList = ["twenty questions", "guess the number", "trivia", "word association", "wordle"]
+gameList = ["twenty questions", "guess the number", "trivia", "wordle"]
 
 def displayGameList():
     gameListStr = "Here's the games I have:\n"
